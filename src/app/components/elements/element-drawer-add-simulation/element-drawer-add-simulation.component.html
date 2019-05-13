@@ -1,0 +1,26 @@
+<app-template-drawer title="New Simulation" [isDrawerToggled]="isAddSimulationToggled" (closeDrawer)="closeDrawer()">
+  <div class="body p-4" body>
+    <form [formGroup]="form" (ngSubmit)="submitInput()">
+      <div class="input-container mb-3">
+        <input type="text" formControlName="name" placeholder="Enter simulation name">
+        <div class="input-error"
+             *ngIf="(form.controls['name'].dirty || isSubmitted) && form.controls['name'].errors">
+          {{form.controls['name'].errors.required ? '*A simulation name is required' : ''}}
+        </div>
+      </div>
+      <div class="input-container">
+        <textarea formControlName="input" placeholder="Enter simulation input"></textarea>
+        <div class="input-error"
+             *ngIf="(form.controls['input'].dirty || isSubmitted) && form.controls['input'].errors">
+          {{form.controls['input'].errors.input ? '*A valid input is required' : ''}}
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="footer" footer>
+    <div class="d-flex justify-content-start p-4">
+      <div class="button text-center mr-3" (click)="closeDrawer()">Cancel</div>
+      <button type="submit" class="button text-center" (click)="submitInput()" [ngClass]="{disabled: !form.valid}">Simulate</button>
+    </div>
+  </div>
+</app-template-drawer>

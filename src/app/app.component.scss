@@ -1,0 +1,18 @@
+@import "variables";
+
+.app-container {
+  width: 100vw;
+  height: 100vh;
+
+  .app-side-menu {
+    width: 300px;
+    height: 100vh;
+    background: $color-blue-primary
+  }
+
+  .app {
+    height: 100vh;
+    overflow-y: scroll;
+  }
+;
+}

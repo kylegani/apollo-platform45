@@ -1,0 +1,18 @@
+<div class="drawer-container d-flex flex-column shadow" [ngClass]="{active: isDrawerToggled}">
+  <div class="d-flex flex-column flex-grow-1">
+    <div class="drawer-header d-flex justify-content-center align-items-center">
+      <div class="drawer-close app-icon large d-flex justify-content-center align-items-center mr-3"
+           (click)="emitCloseDrawer('close')"
+      >
+        <svg><use xlink:href="#icon-arrow"></use></svg>
+      </div>
+      <div class="drawer-title flex-grow-1">{{title}}</div>
+    </div>
+    <div class="drawer-body">
+      <ng-content select="[body]"></ng-content>
+    </div>
+  </div>
+  <div class="drawer-footer d-flex justify-content-center flex-shrink-1">
+    <ng-content select="[footer]"></ng-content>
+  </div>
+</div>

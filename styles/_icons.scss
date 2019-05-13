@@ -1,0 +1,13 @@
+.app-icon {
+  svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  &.large {
+    svg {
+      width: 25px;
+      height: 25px;
+    }
+  }
+}

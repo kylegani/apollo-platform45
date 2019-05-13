@@ -1,0 +1,45 @@
+<app-template-drawer [title]="'Simulation: ' + simulation?.payload?.name"
+                     [isDrawerToggled]="isSimulationResultsToggled"
+                     (closeDrawer)="closeDrawer()">
+  <div class="body p-4" body>
+    <div class="row">
+      <div class="col-12">
+        <h4>Output</h4>
+        <hr>
+        <div class="output mb-3">
+          <div class="output-item" *ngFor="let rover of simulation?.payload?.rovers">
+            {{rover.endPosition.x}} {{rover.endPosition.y}} {{rover.direction}}
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <h4>Simulation stats</h4>
+        <hr>
+      </div>
+      <div class="col-12 col-md-6">
+        <app-template-stats-tile
+          [value]="simulation?.payload?.rovers.length || 0"
+          title="Rovers Deployed"
+        ></app-template-stats-tile>
+      </div>
+      <div class="col-12 col-md-6">
+        <app-template-stats-tile
+          [value]="simulation?.payload?.oobCount || 0"
+          title="Out-of-bounds Events"
+        ></app-template-stats-tile>
+      </div>
+      <div class="col-12 col-md-6">
+        <app-template-stats-tile
+          [value]="simulation?.payload?.collisionCount || 0"
+          title="Collision Events"
+        ></app-template-stats-tile>
+      </div>
+    </div>
+
+  </div>
+  <div class="footer" footer>
+    <div class="d-flex justify-content-start p-4">
+      <div class="button text-center mr-3" (click)="closeDrawer()">Close</div>
+    </div>
+  </div>
+</app-template-drawer>

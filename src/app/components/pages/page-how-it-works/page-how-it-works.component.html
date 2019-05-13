@@ -1,0 +1,111 @@
+<app-template-page
+  [options]="pageOptions"
+  [title]="pageTitle">
+  <h4>Installation & Execution</h4>
+  <hr>
+  <p>This web application was built using Angular CLI 7.3.1 and Node 11.9.0. It is recommended that these versions
+    be used to ensure the correct functioning of the application. In addition, I would also suggest having Node
+    Package Manager installed.</p>
+  <p>To install the application the following can be run from your terminal within the root folder of the application:</p>
+  <code>npm install</code>
+  <div class="mb-3"></div>
+  <p>To run the application locally, execute the following command:</p>
+  <code>ng serve</code>
+  <div class="mb-3"></div>
+  <p>Once installed and served, you can access the application by visiting the following URL in your browser:</p>
+  <code>http://localhost:4200</code>
+  <div class="mb-5"></div>
+  <h4>Process</h4>
+  <hr>
+  <p></p>
+  <ol class="mb-5">
+    <li>A user inputs data and a simulation name via the 'New Simulation' drawer.</li>
+    <li>Realtime-time validation takes place as the user types to ensure quality of the data on-the-fly.</li>
+    <li>A user submits the form once validation succeeds by clicking the 'Simulate' button.</li>
+    <li>A map with bounds is initiated from the input.</li>
+    <li>Rover objects are created from the input, instructions are populated and details pertaining to the starting
+      location and direction of the rover is stored within the object.</li>
+    <li>Instructions are executed.</li>
+    <li>Before and after (especially for the last movement) instructions are executed, a rover is checked for collision
+      and if it has veered off the boundaries of the map. If either of these are true, all remaining instructions are
+      disregarded.</li>
+    <li>Once a simulation has completed its course, it is stored in the database.</li>
+    <li>When a new simulation is stored in the database, a cloud function computes analytics pertaining to
+      all simulations. </li>
+    <li>Users can access simulation outputs after creating a new simulation or by clicking on the table on the
+      simulations page. </li>
+  </ol>
+  <h4>Assumptions</h4>
+  <hr>
+  <ul class="mb-5">
+    <li>Although the challenge says that the map is "curiously rectangular", seeing as a map size of (5, 5) is
+      provided and a valid output is given in the example, square maps are also valid map sizes. As a result no
+      validation for the shape of the map has been implemented.</li>
+    <li>A rover cannot be placed or move  out of bounds (a combination of x and y co-ordinates that are greater than
+      the upper right co-ordinates or less than (0, 0)).</li>
+    <li>A valid facing direction refers to compass points known as "N", "E", "S" and "W".</li>
+    <li>A valid instruction refers to two rotational vectors and one positional vector known as "L", "R" and "M"
+      respectively.</li>
+    <li>The square directly North from (x, y) is (x, y+1).</li>
+    <li>The first line of input is the upper-right coordinates of the plateau, the lower-left coordinates are assumed
+      to be (0, 0).</li>
+    <li>There is no limit to the size of a map.</li>
+    <li>There is no limit to the number of rovers.</li>
+    <li>Each instruction, map bounds and rover position line is separated by an empty line.</li>
+    <li>A map bounds line contains two integers corresponding to the top right x and y block which also serves as a
+      boundary past which a rover cannot travel.</li>
+    <li>A rover position line contains two integers and a letter separated by spaces, corresponding to the x and y
+      co-ordinates and the rover's orientation and can be preceded by the instructional line for the previous rover
+      if one exists.</li>
+    <li>Each line may or may not have spaces preceding and after content which will be removed without hindering
+      processing and validation.</li>
+    <li>Rovers do not have to have instruction lines attached to them and can be placed positionally without having to
+      move.</li>
+    <li>An instructional line contains any combination of "L", "R" and "M" characters and is preceded by a rover
+      position line.</li>
+    <li>Instructions for one rover will not be executed before the previous one has completed.</li>
+    <li>Only once the entirety of the input is valid will data be processed.</li>
+  </ul>
+  <h4>Integration</h4>
+  <hr>
+  <p>Because this is a back-end-challenge, I thought that some level of integration would be beneficial. Although
+    most of the computing happens in front-end functions that are easily portable to a server-side integration
+    such as an API, for the purposes of this application I have integrated with Firebase Firestore. It's great for rapid
+    prototyping, offers a flexible and highly performant document DB.</p>
+  <p>Simulations are streamed from a realtime-database in Firestore. This means that a user has access to data in
+    real-time without having to refresh their browser. The system automatically updates as new data becomes available.</p>
+  <p>I also make use of a Firebase cloud function to compute analytics once new simulations are stored in the database
+    - which can be found in:</p>
+  <code>/functions/src/index.ts</code>
+  <div class="mb-4"></div>
+  <h4>Improvements</h4>
+  <hr>
+  <p>As with any piece of software, there are always functions and features that can be added, removed or improved.
+    As for this one, here are a few things I would to supercharge this application
+  </p>
+  <ul class="mb-5">
+    <li><span class="font-weight-bold">Unit testing:</span> With time being so short for this development cycle,
+      manual testing was the best option to showcase the most skills. Under normal circumstances unit
+      testing would be a cardinal rule.</li>
+    <li><span class="font-weight-bold">End-to-end testing:</span> This is a front-end application. Automated unit
+      testing would be a very big preference, especially on larger projects that require more regression testing.</li>
+    <li><span class="font-weight-bold">Loaders:</span> Loaders greatly improve the user's experience and serve as a
+      great means for status and feedback.</li>
+    <li><span class="font-weight-bold">Error handling:</span> Because this application speaks to a server, anything
+      could go wrong in that communication. Giving a user visual feedback that something went wrong will always be
+      a good thing.</li>
+    <li><span class="font-weight-bold">Server-side computing:</span> Limiting the speed of a transaction based on client
+      resources is a big no-no. With auto-scaling architecture available as the norm, simulations should be computed
+      on the back-end.</li>
+    <li><span class="font-weight-bold">Mobile responsiveness:</span> While this application has been integrated
+    with bootstrap to ensure that porting over to mobile is as seamless as possible, due to time-constraints,
+      an assumption that users will make use of the application through a desktop device has been made,
+      and as such, only caters to that audience (for now).
+    </li>
+    <li><span class="font-weight-bold">A visual representation of the simulation:</span> Who doesn't love pretty
+      little pictures?</li>
+    <li><span class="font-weight-bold">Paginating simulation results:</span> As result sets get larger, delivery of all
+      results becomes a challenge. To ensure performance , limiting the number of results per round-trip to the server
+      would be a huge win!</li>
+  </ul>
+</app-template-page>

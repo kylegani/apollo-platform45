@@ -1,0 +1,23 @@
+<div class="side-menu-container d-flex justify-content-between flex-column">
+  <div>
+    <div class="logo pt-4 px-5">
+      <svg><use xlink:href="#logo"></use></svg>
+    </div>
+    <div class="side-menu-items py-4">
+      <a
+        *ngFor="let item of sideMenuItems"
+        [routerLink]="item.url"
+        routerLinkActive="active"
+      >
+        <div class="side-menu-item px-5 py-2">{{item.title}}</div>
+      </a>
+    </div>
+  </div>
+  <div class="side-menu-footer">
+    <a href="">
+      <div class="side-menu-item px-5 py-2 mb-4">
+        The Challenge
+      </div>
+    </a>
+  </div>
+</div>

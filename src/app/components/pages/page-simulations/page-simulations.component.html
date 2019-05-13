@@ -1,0 +1,70 @@
+<app-template-page
+  (buttonClicked)="handleButtonClicked($event)"
+  [options]="pageOptions"
+  [title]="pageTitle">
+  <div class="row">
+    <div class="col-12 col-md-6 col-lg-3">
+      <app-template-stats-tile
+        [value]="simulationStats?.payload?.roverCount"
+        title="Rovers Deployed"
+      ></app-template-stats-tile>
+    </div>
+    <div class="col-12 col-md-6 col-lg-3">
+      <app-template-stats-tile
+        [value]="simulationStats?.payload?.simulationsCount"
+        title="Simulations Executed"
+      ></app-template-stats-tile>
+    </div>
+    <div class="col-12 col-md-6 col-lg-3">
+      <app-template-stats-tile
+        [value]="simulationStats?.payload?.oobCount"
+        title="Out-of-bounds events"
+      ></app-template-stats-tile>
+    </div>
+    <div class="col-12 col-md-6 col-lg-3">
+      <app-template-stats-tile
+        [value]="simulationStats?.payload?.collisionCount"
+        title="Collision Events"
+      ></app-template-stats-tile>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="simulations-header">
+        <h4>Recent Simulations</h4>
+        <hr>
+        <table class="simulations">
+          <thead>
+          <tr class="font-weight-bold">
+            <td>Details</td>
+            <td align="center">Rovers</td>
+            <td align="center">Out-of-bounds</td>
+            <td align="center">collisions</td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let simulation of simulations" (click)="activateSimulation(simulation.id)">
+            <td>
+              <div class="simulation-name font-weight-bold">
+                {{simulation?.payload?.name}}
+              </div>
+              <div class="simulation-date">
+                {{simulation?.payload?.simulationDate | date: 'medium'}}
+              </div>
+            </td>
+            <td class="stats-item" align="center">
+              {{simulation?.payload?.rovers?.length || 0}}
+            </td>
+            <td class="stats-item" align="center">
+              {{simulation?.payload?.oobCount || 0}}
+            </td>
+            <td class="stats-item" align="center">
+              {{simulation?.payload?.collisionCount || 0}}
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</app-template-page>

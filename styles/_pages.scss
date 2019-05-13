@@ -1,0 +1,21 @@
+@import "variables";
+
+.page-container {
+  position: relative;
+  width: calc(100vw - 300px);
+  height: 100vh;
+  overflow-y: scroll;
+
+  &.dark {
+    color: #fff;
+    background: #171c28;
+    background: -moz-linear-gradient(-45deg, #171c28 0%, #121622 100%);
+    background: -webkit-linear-gradient(-45deg, #171c28 0%,#121622 100%);
+    background: linear-gradient(135deg, #171c28 0%,#121622 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#171c28', endColorstr='#121622',GradientType=1 );
+  }
+}
+
+.page-inner {
+  width: calc(100vw - 300px);
+}

@@ -1,0 +1,22 @@
+<div class="page-inner py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="page-header d-flex justify-content-between align-items-center mb-4">
+          <div class="page-title"><h2>{{title}}</h2></div>
+          <div class="button d-flex justify-content-center align-items-center"
+               *ngIf="options.hasAddButton"
+               (click)="emitButtonClicked('add')"
+          >
+            <div class="icon">
+              <svg><use xlink:href="#icon-add"></use></svg>
+            </div>
+            {{options.addButtonText}}</div>
+        </div>
+        <div class="page-body">
+          <ng-content></ng-content>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

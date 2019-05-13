@@ -1,0 +1,42 @@
+@import "variables"
+
+.side-menu-container
+  font-family: 'Rajdhani', sans-serif
+  min-height: 100vh
+
+  .logo
+    fill: #ffffff
+
+    svg
+      width: 150px
+      height: 15px
+
+  .side-menu-items
+    font-weight: 700
+
+a
+  text-decoration: none
+
+  .side-menu-item
+    position: relative
+    font-size: 1.1em
+    color: $color-blue-light
+
+    &:hover
+      color: $color-primary
+
+    &:after
+      content: '\A'
+      height: 100%
+      position: absolute
+      top: 0
+      left: 0
+      background: $color-primary
+      padding: 0 0px
+
+  &.active
+    .side-menu-item
+      color: $color-primary
+
+      &:after
+        padding: 0 2px

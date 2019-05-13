@@ -1,0 +1,32 @@
+@import "variables"
+@import "mixins"
+
+.drawer-container
+  position: fixed
+  width: 500px
+  height: 100vh
+  overflow-y: scroll
+  top: 0
+  right: -550px
+  z-index: 99
+  background: #fff
+  @include transition(all 0.5s ease-in-out)
+
+  &.active
+    right: 0
+
+  .drawer-header
+    font-family: 'Rajdhani', sans-serif
+    color: $color-blue-light
+    background: $color-blue-primary
+
+    .drawer-close
+      width: 60px
+      height: 60px
+      background: $color-blue-secondary
+      fill: $color-blue-light
+
+    .drawer-title
+      font-size: 1.2em
+      font-weight: bold
+

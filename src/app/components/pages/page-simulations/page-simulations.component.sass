@@ -1,0 +1,31 @@
+@import "variables"
+@import "mixins"
+
+.simulations
+  width: 100%
+
+  td
+    padding: 15px
+
+  thead
+    color: $color-blue-lighter
+
+  tbody
+    tr
+      border-bottom: 1px solid $color-blue-extra-light
+      @include transition(all 0.3s ease-in-out)
+      cursor: pointer
+
+      td
+
+        .simulation-name
+          color: $color-blue-secondary
+
+        .simulation-date
+          font-size: 0.8em
+
+        &.stats-item
+          width: 150px
+
+      &:hover
+        background: $color-blue-extra-light
